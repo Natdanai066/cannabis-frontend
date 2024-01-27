@@ -1,8 +1,7 @@
-//  pages/login.js
-"use client";
+"use client"
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import { CssVarsProvider } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
 import FormControl from '@mui/joy/FormControl';
@@ -11,45 +10,52 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import config from '../utils/config';
-import { useRouter } from "next/navigation";  // เพิ่ม import
-import Navbar from "../navbar/Navbar"
+import { useRouter } from "next/navigation"; // แก้ไขการ import
+import Navbar from '../navbar/Navbar';
+import'../utils/config';
 
-export default function LoginFinal() {
-  const BASE_URL = config.SERVER;
-  const router = useRouter();  // เพิ่มการใช้ useRouter
+function LoginFinal() {
+  const BASE_URL = config.SERVER_URL;
+  const router = useRouter();
 
   const [values, setValues] = useState({
-    username: "",
-    password: "",
-    email: "",
-    date: "",
+    email: '',
+    password: '',
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    
     try {
-      const response = await Axios.post(`${BASE_URL}/users`, values);
+      const response = await Axios.post(`${BASE_URL}/users`,{
+
+      
+        email: values.email,
+        password: values.password
+      });
       console.log("Login Successful:", response.data);
 
       setValues({
-        username: "",
-        password: "",
-        email: "",
-        date: "",
+        email: '',
+        password: '',
       });
 
       if (response.data.success) {
         // Login สำเร็จ, ทำการเด้งไปยังหน้าหลัก
         router.push('/');
       } else {
+        setError(response.data.message);
         console.error("Login Failed:", response.data.message);
       }
     } catch (error) {
+      setError('Login error');
       console.error('Login Error:', error);
     }
   };
@@ -57,7 +63,7 @@ export default function LoginFinal() {
   return (
     <CssVarsProvider>
       <Navbar />
-      <br/>
+      <br />
       <main>
         <Sheet
           sx={{
@@ -74,7 +80,6 @@ export default function LoginFinal() {
           }}
           variant="outlined"
         >
-          
           <div>
             <Typography level="h4" component="h1">
               <b>Welcome!</b>
@@ -89,6 +94,7 @@ export default function LoginFinal() {
               placeholder="johndoe@email.com"
               value={values.email}
               onChange={handleChange}
+              required
             />
           </FormControl>
           <FormControl>
@@ -99,12 +105,14 @@ export default function LoginFinal() {
               placeholder="password"
               value={values.password}
               onChange={handleChange}
+              required
             />
           </FormControl>
 
           <Button sx={{ mt: 1 }} type="submit" onClick={handleSubmit}>
             Log in
           </Button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <Typography
             endDecorator={<Link href="/sign-up">Sign up</Link>}
             fontSize="sm"
@@ -117,3 +125,5 @@ export default function LoginFinal() {
     </CssVarsProvider>
   );
 }
+
+export default LoginFinal;

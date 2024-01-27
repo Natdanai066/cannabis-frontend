@@ -11,7 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Nav from '../testnav/Nav';
+import Navbar from '../navbar/Navbar';
 import config from "../utils/config.js";
 
 function Editmenu() {
@@ -54,14 +54,14 @@ function Editmenu() {
 
   return (
     <>
-      <Nav />
+      <Navbar />
       <div className="h-screen">
         <div className="bg-white">
           <br />
 
           <Container maxWidth="md">
             <Grid container spacing={2}>
-              <Grid item xs={6} sm={4} md={6} lg={6} >
+              <Grid item xs={6} sm={6} md={6} lg={6} >
                 <Card sx={{ maxWidth: 350 }} key={cannabisData.id}>
                   <CardMedia
                     sx={{ height: 180 }}
@@ -84,12 +84,8 @@ function Editmenu() {
                       onClick={() => window.open(cannabisData.lc, '_blank')}
                     >
                       Google Maps
-                    </Button>
-                    <Link href={{ pathname: '/moredetail', query: { cannabisId: cannabisData.id } }} passHref>
-                      <Button className="btn btn-info text-blue">
-                        เพิ่มเติม
-                      </Button>
-                    </Link>
+                   
+                   </Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -97,7 +93,7 @@ function Editmenu() {
           </Container>
 
           <div className="flex justify-center align-middle gap-4 mt-10">
-            <Link href={{ pathname: '/' }} passHref>
+            <Link href={{ pathname: '/postpage' }} passHref>
               <Button className="btn px-12">ย้อนกลับ</Button>
             </Link>
           

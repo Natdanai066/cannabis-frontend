@@ -1,6 +1,5 @@
 "use client"
 import React, { useRef, useState } from 'react';
-import Nav from './testnav/Nav';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import Axios from 'axios';
@@ -8,14 +7,8 @@ import { useRouter } from "next/navigation";
 import './utils/config.js'
 import config from './utils/config.js';
 import Navbar from './navbar/Navbar.jsx'
-
 import styles from "./home.module.css";
-
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-
+import "./globals.css";
 import './style.css';
 
 
@@ -40,53 +33,19 @@ const EmptyPage = () => {
 
 
 
-  const deleteCannabis = (id) => {
-    const shouldDelete = window.confirm("คุณต้องการลบข้อมูลนี้จริง ๆ หรือไม่?");
-    if (shouldDelete) {
-      Axios.delete(`${BASE_URL}/cannabis/${id}`).then((response) => {
-        setCannabisList(
-          cannabisList.filter((val) => {
-            return val.id !== id
-          })
-        )
-      }).then(() => {
-        if (isDeleted === false) {
-          setIsDeleted(true)
-          setTimeout(() => {
-            setIsDeleted(false)
-          }, 2000)
-        }
-      })
-    }
-  }
+ 
 
   useEffect(() => {
     getCannabis()
   }, [])
 
-  const handleOpenGoogleMaps = (id) => {
-    const googleMapsUrl = (cannabis.lc);
-    // แทน YourLocation ด้วยตำแหน่งที่คุณต้องการ
-
-    // เปิด Google Maps ในหน้าต่างใหม่
-    window.open(googleMapsUrl, '_blank');
-  };
+  
  
   
   return (
     <>
-      
-   
-  
-
-
-      
 
         <Navbar />
-        
-        <div className="h-screen ">
-          <div className="bg-white">
-            
             <br />
             <div className={styles.container}>
       <div className={styles.textContainer}>
@@ -108,9 +67,7 @@ const EmptyPage = () => {
 
 
 
-           
-          </div>
-        </div>
+         
       
       
       

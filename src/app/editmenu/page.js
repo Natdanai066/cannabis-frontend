@@ -5,7 +5,7 @@ import Axios from 'axios';
 import Link from 'next/link';
 import config from "../utils/config.js";
 import "../utils/config.js";
-import Nav from '../testnav/Nav.jsx';
+import Navbar from '../navbar/Navbar.jsx';
 
 function Singup() {
     const [formData, setFormData] = useState({
@@ -78,7 +78,7 @@ function Singup() {
 
   return (
     <body>
-        <Nav />
+        <Navbar />
         <div className="h-screen flex justify-center items-center bg-gray-100">
       <div className="relative shadow-lg p-8 w-2/4 h-[842px] text-center bg-white rounded-md">
         <div className="flex justify-center"></div>

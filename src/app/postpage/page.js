@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useState } from 'react';
-import Nav from '../testnav/Nav';
+import Navbar from '../navbar/Navbar';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -17,6 +17,7 @@ import '../utils/config'
 import config from '../utils/config'
 import Link from 'next/link';
 import Container from '@mui/material/Container';
+import "../globals.css"
 
 
 const Postpage = () => {
@@ -48,7 +49,7 @@ const Postpage = () => {
 
         <div className="h-screen ">
           <div className="bg-white">
-        <Nav />
+        <Navbar />
         <br />
         <br />
 <Container maxWidth="md">
